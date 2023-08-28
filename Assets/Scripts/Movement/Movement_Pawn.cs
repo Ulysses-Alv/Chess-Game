@@ -1,4 +1,5 @@
 ﻿using MovementInterfaces;
+using System;
 
 class Movement_Pawn : IPawn
 {
@@ -8,14 +9,24 @@ class Movement_Pawn : IPawn
     }
     public void ShowAvailableCaptures(int initialCol, int initialFila, Piece piece)
     {
-        throw new System.NotImplementedException();
+        ShowAvailableCaptures_Pawn(initialCol, initialFila, piece);
     }
 
-    private void ShowCapturesForPawn(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves_Pawn(int initialCol, int initialFila, Piece piece)
     {
-        OnPassant();
-    }
 
+        foreach (int movement in Movimientos(piece))
+        {
+            int fila_newCell = initialFila + movement;
+
+            Cell cell = BoardAccess.GetCell(initialCol, fila_newCell).GetComponent<Cell>();
+
+            if (fila_newCell != initialFila //para comprobar q no sean la misma pieza
+                && cell.PieceOnThisCell != null) break;
+
+            cell.ActivateBlueCell();
+        }
+    }
     private void OnPassant()
     {
 
@@ -54,26 +65,24 @@ class Movement_Pawn : IPawn
                 : 2;
     }
 
+
     public void ShowAvailableCaptures_Pawn(int initialCol, int initialFila, Piece piece)
     {
-        throw new System.NotImplementedException();
+        RegularCapture(initialCol, initialFila, piece);
+        OnPassant();
     }
 
-    public void ShowAvailableMoves_Pawn(int initialCol, int initialFila, Piece piece)
+    private static void RegularCapture(int initialCol, int initialFila, Piece piece)
     {
+        int filaAdder = piece.color == ColorDePieza.Negro ? 1 : -1;
 
-        foreach (int movement in Movimientos(piece))
+        foreach (int col in new int[] { 1, -1 })
         {
-            int fila_newCell = initialFila + movement;
-
-            Cell cell = Board.GetCell(initialCol, fila_newCell).GetComponent<Cell>();
-
-            if (fila_newCell != initialFila //para comprobar q no sean la misma pieza
-                && cell.PieceOnThisCell != null) break;
-
-            cell.ActivateBlueCell();
+            Cell cell = BoardAccess.GetCell(initialCol + col, initialFila + filaAdder).GetComponent<Cell>();
+            Movement.IsEnemyActivateRed(piece.color, cell);
         }
     }
 
-   
+
+
 }

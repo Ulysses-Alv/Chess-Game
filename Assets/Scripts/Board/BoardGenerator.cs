@@ -1,13 +1,14 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Board : MonoBehaviour
+
+public class BoardGenerator : MonoBehaviour
 {
     public int width;
     public int height;
 
     public GameObject Cell;
-    public static Board instance;
+    public static BoardGenerator instance;
 
     public List<GameObject> cells;
     public static List<GameObject> _cells;
@@ -28,20 +29,6 @@ public class Board : MonoBehaviour
             }
         }
     }
-    public static GameObject GetCell(int col, int fila)
-    {
-        foreach (GameObject cell in _cells)
-        {
-            
-            (int columna, int fila) coordenadas = cell.GetComponent<Cell>().coords.GetPosition();
-
-            if (coordenadas.fila == fila && coordenadas.columna == col)
-                return cell;
-        }
-        return null;
-    }
-
-    #region Creacion
     private void CreateNewCell(float x, float y)
     {
         GameObject newCell = NewCell(x, y);
@@ -88,6 +75,4 @@ public class Board : MonoBehaviour
             }
         }
     }
-    #endregion
-
 }

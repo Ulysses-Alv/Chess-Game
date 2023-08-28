@@ -17,7 +17,7 @@ public class Movement_Rook : IRook
 
             if (col_newCell < 1 || col_newCell > 8) continue;
 
-            Cell cell = Board.GetCell(col_newCell, initialFila).GetComponent<Cell>();
+            Cell cell = BoardAccess.GetCell(col_newCell, initialFila).GetComponent<Cell>();
 
             cell.ActivateBlueCell();
         }
@@ -27,7 +27,7 @@ public class Movement_Rook : IRook
 
             if (fila_newCell < 1 || fila_newCell > 8) continue;
 
-            Cell cell = Board.GetCell(initialCol, fila_newCell).GetComponent<Cell>();
+            Cell cell = BoardAccess.GetCell(initialCol, fila_newCell).GetComponent<Cell>();
 
             cell.ActivateBlueCell();
         }

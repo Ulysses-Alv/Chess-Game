@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using MovementInterfaces;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class PieceBuilder
 {
-    [SerializeField] private Piece piece;
-    private Movement movement;
+    private Piece piece;
+    private IMovement movement;
     private ColorDePieza colorDePieza;
     private Sprite sprite;
-    private Coords coords;
-
-    public PieceBuilder WithMovement(Movement movement)
+    private int col;
+    private int fila;
+    private Transform position;
+    public PieceBuilder WithMovement(IMovement movement)
     {
         this.movement = movement;
         return this;
@@ -21,9 +23,12 @@ public class PieceBuilder
         return this;
     }
 
-    public PieceBuilder WithPosition(Coords coords)
+    public PieceBuilder WithPosition(int col, int fila)
     {
-        this.coords = coords;
+        this.col = col;
+        this.fila = fila;
+        position = BoardAccess.GetCellPosition(col, fila);
+        
         return this;
     }
     public PieceBuilder WithColor(ColorDePieza colorDePieza)
@@ -34,8 +39,10 @@ public class PieceBuilder
 
     public Piece Build() //Esto Instancia el objeto, en este caso la pieza
     {
-        Piece piece = Object.Instantiate(this.piece);
+        Piece _piece = Object.Instantiate(piece, position);
+        var cell = BoardAccess.GetCell(col, fila);
 
-        return piece;
+        cell.GetComponent<Cell>().SetPiece(piece);
+        return _piece;
     }
 }
