@@ -11,14 +11,11 @@
 
     public static bool IsEnemyPiece(ColorDePieza color, Cell cell)
     {
-        return cell.PieceOnThisCell.GetComponent<Piece>().color != color;
+        return cell.PieceOnThisCell.GetComponent<PieceCustom>().colorDePieza != color;
     }
 
     public static bool IsCellEmpty(Cell cell)
     {
         return cell.PieceOnThisCell != null;
     }
-
-
-
 }

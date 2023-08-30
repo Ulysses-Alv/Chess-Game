@@ -2,14 +2,14 @@
 using System;
 class Movement_Bishop : IBishop
 {
-    public void ShowAvailableMoves(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves(int initialCol, int initialFila, PieceBase piece)
     {
         ShowAvailableMoves_Bishop(initialCol, initialFila, piece);
     }
 
-    public void ShowAvailableMoves_Bishop(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves_Bishop(int initialCol, int initialFila, PieceBase piece)
     {
-        ColorDePieza color = piece.color;
+        ColorDePieza color = piece.colorDePieza;
 
         foreach (int i in new[] { -1, 1 })
         {
@@ -19,12 +19,12 @@ class Movement_Bishop : IBishop
                 int fila_newCell = initialFila + movement * i;
                 if (col_newCell < 1 || col_newCell > 8 || fila_newCell < 1 || fila_newCell > 8) continue;
 
-                Cell cell = BoardAccess.GetCell(col_newCell, fila_newCell).GetComponent<Cell>();
+                Cell cell = BoardAccess.GetCellGO(col_newCell, fila_newCell).GetComponent<Cell>();
 
                 if (col_newCell != initialCol && fila_newCell != initialFila
                     && cell.PieceOnThisCell != null)
                 {
-                    if (cell.PieceOnThisCell.GetComponent<Piece>().color != color)
+                    if (cell.PieceOnThisCell.GetComponent<PieceBase>().colorDePieza != color)
                         cell.ActivateRed();
                     break;
                 }
@@ -37,12 +37,12 @@ class Movement_Bishop : IBishop
 
                 if (col_newCell < 1 || col_newCell > 8 || fila_newCell < 1 || fila_newCell > 8) continue;
 
-                Cell cell = BoardAccess.GetCell(col_newCell, fila_newCell).GetComponent<Cell>();
+                Cell cell = BoardAccess.GetCellGO(col_newCell, fila_newCell).GetComponent<Cell>();
 
                 if (col_newCell != initialCol && fila_newCell != initialFila
                     && cell.PieceOnThisCell != null)
                 {
-                    if (cell.PieceOnThisCell.GetComponent<Piece>().color != color)
+                    if (cell.PieceOnThisCell.GetComponent<PieceBase>().colorDePieza != color)
                         cell.ActivateRed();
                     break;
                 }

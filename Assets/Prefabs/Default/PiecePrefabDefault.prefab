@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1178788554731577627}
   - component: {fileID: 2282183920300072402}
   - component: {fileID: 6206812947772390939}
-  - component: {fileID: 7763673416557784574}
+  - component: {fileID: 476429229480074477}
   m_Layer: 5
-  m_Name: PiecePrefab
+  m_Name: PiecePrefabDefault
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7763673416557784574
+--- !u!114 &476429229480074477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,28 +85,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2305217045593014593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a15dee0cce8f7d4d897a95fff1410ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 60aeda140c68a6c448511908fdc4b3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   celda:
     value: {fileID: 0}
-  pieceData: {fileID: 11400000, guid: b98312051456db940a4197fdf8af2e2a, type: 2}
   color: 0
-  columna: 4
-  fila: 4
-  white_sprites:
-    Queen: {fileID: 21300000, guid: c465a20b346d8024cbc87f843c2d6848, type: 3}
-    King: {fileID: 21300000, guid: 017cc1f141703de429c6475e6e50b461, type: 3}
-    Bishop: {fileID: 21300000, guid: 0544e332aeafd9244929aa8384c77ebb, type: 3}
-    Rook: {fileID: 21300000, guid: ff50eca0a3b5a5d44981d4ac2cda2f59, type: 3}
-    Knight: {fileID: 21300000, guid: b1993d49a37599b46b27ce0d4585bb45, type: 3}
-    Pawn: {fileID: 21300000, guid: 4ec17e231447fe04a9c07410daf9a68d, type: 3}
-    Custom: {fileID: 0}
-  black_sprites:
-    Queen: {fileID: 21300000, guid: f7c97ea8cf1977244bd34912835db7d7, type: 3}
-    King: {fileID: 21300000, guid: d72fc6cfebd3da8428799edbf2e57521, type: 3}
-    Bishop: {fileID: 21300000, guid: 0544e332aeafd9244929aa8384c77ebb, type: 3}
-    Rook: {fileID: 21300000, guid: a0e0cbbeba788714fa7f2c73cf695c42, type: 3}
-    Knight: {fileID: 21300000, guid: bd21cd4e7f438a64887c6c225e51a521, type: 3}
-    Pawn: {fileID: 21300000, guid: 097f27ba554e5c74ea17d0ed9df4b52e, type: 3}
-    Custom: {fileID: 0}
+  columna: 0
+  fila: 0
+  pieceData: {fileID: 0}

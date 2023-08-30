@@ -24,7 +24,7 @@ public class Cell : MonoBehaviour
         GetComponent<Image>().color = color;
     }
 
-    public void SetPiece(Piece piece)
+    public void SetPiece(PieceBase piece)
     {
         if (PieceOnThisCell != null) Destroy(PieceOnThisCell);
 
@@ -34,7 +34,7 @@ public class Cell : MonoBehaviour
     {
         if (PieceOnThisCell == null) return;
 
-        Piece piece = PieceOnThisCell.GetComponent<Piece>();
+        PieceBase piece = PieceOnThisCell.GetComponent<PieceBase>();
 
         piece.ShowPieceAvailableMovements();
     }

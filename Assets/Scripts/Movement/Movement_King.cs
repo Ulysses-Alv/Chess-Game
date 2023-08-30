@@ -3,38 +3,40 @@ using System;
 
 public class Movement_King : IKing
 {
-    public void ShowAvailableMoves(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves(int initialCol, int initialFila, PieceBase piece)
     {
         ShowAvailableMoves_King(initialCol, initialFila, piece);
     }
 
-    public void ShowAvailableMoves_King(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves_King(int initialCol, int initialFila, PieceBase piece)
     {
-        ColorDePieza color = piece.color;
+        ColorDePieza color = piece.colorDePieza;
 
-        for (int col = -1; col <= 1; col++) { for (int fila = -1; fila <= 1; fila++)
+        for (int col = -1; col <= 1; col++)
         {
-            int col_newCell = initialCol + col;
-            int fila_newCell = initialFila + fila;
-
-            if (BoardAccess.ExceedTheBoard(col_newCell, fila_newCell) || (col == 0 && fila == 0)) continue;
-
-            Cell cell = BoardAccess.GetCell(col_newCell, fila_newCell).GetComponent<Cell>();
-
-            if (!Movement.IsCellEmpty(cell))
+            for (int fila = -1; fila <= 1; fila++)
             {
-                Movement.IsEnemyActivateRed(color, cell);
-                break;
+                int col_newCell = initialCol + col;
+                int fila_newCell = initialFila + fila;
+
+                if (BoardAccess.ExceedTheBoard(col_newCell, fila_newCell) || (col == 0 && fila == 0)) continue;
+
+                Cell cell = BoardAccess.GetCellGO(col_newCell, fila_newCell).GetComponent<Cell>();
+
+                if (!Movement.IsCellEmpty(cell))
+                {
+                    Movement.IsEnemyActivateRed(color, cell);
+                    break;
+                }
+
+                if (CellIsUnderAttack(cell)) continue;
+
+                cell.ActivateBlueCell();
             }
-
-            if (CellIsUnderAttack(cell)) continue;
-
-            cell.ActivateBlueCell();
-        }
         }
     }
 
-    
+
 
     private bool CellIsUnderAttack(Cell cell)
     {

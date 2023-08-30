@@ -4,13 +4,14 @@ using Object = UnityEngine.Object;
 
 public class PieceBuilder
 {
-    private Piece piece;
+    private PieceCustom piece;
     private IMovement movement;
     private ColorDePieza colorDePieza;
     private Sprite sprite;
     private int col;
     private int fila;
     private Transform position;
+
     public PieceBuilder WithMovement(IMovement movement)
     {
         this.movement = movement;
@@ -37,10 +38,10 @@ public class PieceBuilder
         return this;
     }
 
-    public Piece Build() //Esto Instancia el objeto, en este caso la pieza
+    public PieceCustom Build() //Esto Instancia el objeto, en este caso la pieza
     {
-        Piece _piece = Object.Instantiate(piece, position);
-        var cell = BoardAccess.GetCell(col, fila);
+        PieceCustom _piece = Object.Instantiate(piece, position);
+        var cell = BoardAccess.GetCellGO(col, fila);
 
         cell.GetComponent<Cell>().SetPiece(piece);
         return _piece;

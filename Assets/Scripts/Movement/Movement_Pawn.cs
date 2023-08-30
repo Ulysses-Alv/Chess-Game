@@ -1,25 +1,25 @@
 ﻿using MovementInterfaces;
 using System;
 
-class Movement_Pawn : IPawn
+class Movement_Pawn :  IPawn
 {
-    public void ShowAvailableMoves(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves(int initialCol, int initialFila, PieceBase piece)
     {
         ShowAvailableMoves_Pawn(initialCol, initialFila, piece);
     }
-    public void ShowAvailableCaptures(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableCaptures(int initialCol, int initialFila, PieceBase piece)
     {
         ShowAvailableCaptures_Pawn(initialCol, initialFila, piece);
     }
 
-    public void ShowAvailableMoves_Pawn(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves_Pawn(int initialCol, int initialFila, PieceBase piece)
     {
 
         foreach (int movement in Movimientos(piece))
         {
             int fila_newCell = initialFila + movement;
 
-            Cell cell = BoardAccess.GetCell(initialCol, fila_newCell).GetComponent<Cell>();
+            Cell cell = BoardAccess.GetCellGO(initialCol, fila_newCell).GetComponent<Cell>();
 
             if (fila_newCell != initialFila //para comprobar q no sean la misma pieza
                 && cell.PieceOnThisCell != null) break;
@@ -32,17 +32,17 @@ class Movement_Pawn : IPawn
 
     }
 
-    private int[] Movimientos(Piece piece)
+    private int[] Movimientos(PieceBase piece)
     {
-        if (piece.color == ColorDePieza.Negro && IsFirstMove(piece))
+        if (piece.colorDePieza == ColorDePieza.Negro && IsFirstMove(piece))
         {
             return new int[] { -1, -1 };
         }
-        if (piece.color == ColorDePieza.Negro && !IsFirstMove(piece))
+        if (piece.colorDePieza == ColorDePieza.Negro && !IsFirstMove(piece))
         {
             return new int[] { -1 };
         }
-        if (piece.color == ColorDePieza.Blanco && IsFirstMove(piece))
+        if (piece.colorDePieza == ColorDePieza.Blanco && IsFirstMove(piece))
         {
             return new int[] { 1, 1 };
         }
@@ -52,34 +52,34 @@ class Movement_Pawn : IPawn
         }
     }
 
-    private bool IsFirstMove(Piece piece)
+    private bool IsFirstMove(PieceBase piece)
     {
         return piece.fila == SecondRank(piece);
     }
 
-    private int SecondRank(Piece piece)
+    private int SecondRank(PieceBase piece)
     {
         return
-            piece.color == ColorDePieza.Negro
+            piece.colorDePieza == ColorDePieza.Negro
                 ? 7
                 : 2;
     }
 
 
-    public void ShowAvailableCaptures_Pawn(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableCaptures_Pawn(int initialCol, int initialFila, PieceBase piece)
     {
         RegularCapture(initialCol, initialFila, piece);
         OnPassant();
     }
 
-    private static void RegularCapture(int initialCol, int initialFila, Piece piece)
+    private static void RegularCapture(int initialCol, int initialFila, PieceBase piece)
     {
-        int filaAdder = piece.color == ColorDePieza.Negro ? 1 : -1;
+        int filaAdder = piece.colorDePieza == ColorDePieza.Negro ? 1 : -1;
 
         foreach (int col in new int[] { 1, -1 })
         {
-            Cell cell = BoardAccess.GetCell(initialCol + col, initialFila + filaAdder).GetComponent<Cell>();
-            Movement.IsEnemyActivateRed(piece.color, cell);
+            Cell cell = BoardAccess.GetCellGO(initialCol + col, initialFila + filaAdder).GetComponent<Cell>();
+            Movement.IsEnemyActivateRed(piece.colorDePieza, cell);
         }
     }
 

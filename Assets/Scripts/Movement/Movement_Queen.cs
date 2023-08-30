@@ -2,14 +2,14 @@
 using System;
 using UnityEngine;
 
-public class Movement_Queen : IMovement
+public class Movement_Queen :  IMovement
 {
-    public void ShowAvailableCaptures(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableCaptures(int initialCol, int initialFila, PieceBase piece)
     {
         throw new NotImplementedException();
     }
 
-    public void ShowAvailableMoves(int initialCol, int initialFila, Piece piece)
+    public void ShowAvailableMoves(int initialCol, int initialFila, PieceBase piece)
     // initial = posicion donde se encuentra la pieza.
     // final = posicion a la que irá la pieza.
     {

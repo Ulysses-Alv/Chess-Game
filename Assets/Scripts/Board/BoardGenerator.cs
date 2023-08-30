@@ -7,6 +7,7 @@ public class BoardGenerator : MonoBehaviour
     public int width;
     public int height;
 
+    public Color marron = new Color(128f, 63f, 10f);
     public GameObject Cell;
     public static BoardGenerator instance;
 
@@ -56,7 +57,7 @@ public class BoardGenerator : MonoBehaviour
         {
             if (c % 2 == 0)
             {
-                return Color.black;
+                return marron;
             }
             else
             {
@@ -71,7 +72,7 @@ public class BoardGenerator : MonoBehaviour
             }
             else
             {
-                return Color.black;
+                return marron;
             }
         }
     }
