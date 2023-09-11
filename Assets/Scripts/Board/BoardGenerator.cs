@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class BoardGenerator : MonoBehaviour
 {
-    public int width;
-    public int height;
+    private readonly int width = 8;
+    private readonly int height = 8;
 
-    public Color marron = new Color(128f, 63f, 10f);
-    public GameObject Cell;
-    public static BoardGenerator instance;
+    [SerializeField] private Color brown;
+    [SerializeField] private GameObject Cell;
+    [SerializeField] private GridSystem gridSystem;
 
     public List<GameObject> cells;
+
+    private static BoardGenerator instance;
     public static List<GameObject> _cells;
 
-    public GridSystem gridSystem;
     private void Awake()
     {
         instance = this;
@@ -49,15 +50,14 @@ public class BoardGenerator : MonoBehaviour
 
     private Color SetColor(float fila, float columna)
     {
-        var f = fila * 2;
-        var c = columna * 2;
-
+        float f = fila * 2;
+        float c = columna * 2;
 
         if (f % 2 == 0)
         {
             if (c % 2 == 0)
             {
-                return marron;
+                return brown;
             }
             else
             {
@@ -72,7 +72,7 @@ public class BoardGenerator : MonoBehaviour
             }
             else
             {
-                return marron;
+                return brown;
             }
         }
     }

@@ -18,7 +18,7 @@ public class Cell : MonoBehaviour
     public void SetCell(int Columna, int Fila, Color color)
     {
         coords = new Coords(Columna, Fila);
-        
+
         col = Columna;
         fila = Fila;
         GetComponent<Image>().color = color;
@@ -38,12 +38,12 @@ public class Cell : MonoBehaviour
 
         piece.ShowPieceAvailableMovements();
     }
-    
+
     public void ActivateBlueCell()
     {
         checkDot.SetActive(true);
         checkDot.GetComponent<Image>().color = Color.blue;
-        Invoke("DeactivateBlue", 2f);
+        Invoke(nameof(DeactivateBlue), 2f);
     }
     private void AddMoveToThisCell()
     {
@@ -70,6 +70,6 @@ public class Cell : MonoBehaviour
     {
         checkDot.SetActive(true);
         checkDot.GetComponent<Image>().color = Color.green;
-        Invoke("DeactivateRed", 2f);
+        Invoke(nameof(DeactivateRed), 2f);
     }
 }
